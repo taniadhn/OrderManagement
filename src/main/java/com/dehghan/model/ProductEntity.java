@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -29,7 +31,7 @@ public class ProductEntity {
     private String description;
 
     @Column(name = "PRICE", nullable = false)
-    private Double price;
+    private Double productPrice;
 
     @Column(name = "QUANTITY")
     private Integer quantity;
@@ -37,9 +39,10 @@ public class ProductEntity {
     @Column(name = "TAXRATE" )
     private Float taxRate;
 
-    @ManyToOne(fetch = FetchType.LAZY)  /**Bir sürü post tek bir User bağlı olabilir*/
-    @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE) /**Bir User silindiğinde tüm postları silisin*/
-    @JsonIgnore
-    UserEntity user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
+    @NotNull
+    UserEntity userEntity;
 }

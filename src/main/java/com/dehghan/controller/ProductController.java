@@ -5,8 +5,9 @@ import com.dehghan.model.ProductEntity;
 import com.dehghan.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/v1/products")
@@ -29,7 +30,7 @@ public class ProductController {
         productService.newProduct(productEntity);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ProductEntity updateProduct(@PathVariable Long id, @RequestBody ProductEntity productUpdate){
 
         return productService.updatePrduct(id, productUpdate);
@@ -42,4 +43,15 @@ public class ProductController {
         productService.deleteOneProduct(id);
 
     }
+        @PostMapping("/calculateTax/{id}")
+        public double calculateProductPrice( @RequestBody ProductEntity productEntity) {
+         /***  double productPrice =productEntity.getProductPrice();
+           double taxRate  = productEntity.getTaxRate();
+            double taxAmount = productPrice * taxRate;
+            double totalPrice = productPrice + taxAmount;
+            return totalPrice;**/
+         return  productService.calculateTax(productEntity);
+        }
+
+
 }
