@@ -46,7 +46,7 @@ public class CustomerController {
     }
 
     @GetMapping("/search")
-    public List<Map<String, Object>> searchCustomers(@RequestParam String keyword) {
+    public List<Map<String, Object>> searchCustomers(@RequestParam("name") String keyword) {
         return customerService.getCustomersWithOrders(keyword);
     }
 

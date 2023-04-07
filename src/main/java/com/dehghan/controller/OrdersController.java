@@ -49,7 +49,7 @@ public class OrdersController {
 
 
     @GetMapping("/after-date")
-    public List<OrdersEntity> getOrdersAfterDate(@RequestParam("createDate") String date) {
+    public List<OrdersEntity> getOrdersAfterDate(@RequestParam("date") String date) {
         return orderService.getOrdersAfterDate(date);
     }
 
