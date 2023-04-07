@@ -8,22 +8,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "CUSTOMER")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity {
+public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
+    @Column(name = "CUSTOMER_ID")
     Long id;
 
-    @Column(name = "USER_NAME")
-    String username;
+    @Column(name = "NAME")
+    String name;
 
-    @Column(name = "PASSWORD")
-    String password;
+
+    @Column(name = "AGE")
+    private Integer age;
+
+
+    @Column(name = "ORDERS")
+    private String order;
 
 }
